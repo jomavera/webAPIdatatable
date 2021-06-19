@@ -1,14 +1,18 @@
-# Table for 
+# Table forfor accesible query of data from Web API using Airflow, Dash and Heroku
+
+An ecuadorian supermarket shows its prices in a webpage so as to consumer can check product prices. This webpage doesn't allow to effectively filter, sort and search the price for a particular product. In this way, the purpose of this app is to create an app to access the product prices information and improve the accessibility to consumers. The app can be accessed in [link](http://pulldashboard.herokuapp.com/). This repo is for testing only so it extracts and loads data for 200 products but the DAG can be easily modified to extract the whole data.
 
 ## Description
 
+The application is made up a **Airflow** app that schedules daily updates to the Webpsage database. The Webpage is a **Dash** app that reads data from a Postgress database and present it in a table. The table is capable of filtering and searching. The architecture is discribed in the following figure.
+
 
 ## Instructions
-The following instructions are for creating two separate apps in Heroku. In one app runs the web interface of the table with access to a Postgres database and on the other app runs airflow that extracts data from the web api and load it to the database of the first app. 
+The following instructions guides to the creation of two separate apps in Heroku. One app runs the web interface of the table and connection to a Postgres database. The other app runs Airflow DAG that extracts data from the Web API and then loads the data the database of the first app. 
 
 1. Clone repository
 
-2. Create conda environment for python project
+2. Create conda environment for Python project (In case of local testing)
 
     `conda create -n myenv python=3.8.10`
 
@@ -22,7 +26,7 @@ The following instructions are for creating two separate apps in Heroku. In one 
     pip install apache-airflow==2.1.0 apache-airflow-providers-postgres
     ```
 
-4. Login to Heroku CLI
+4. Login to Heroku CLI (Instructions for [installation](https://devcenter.heroku.com/articles/heroku-cli#download-and-install))
 
     `heroku login`
 
@@ -31,8 +35,8 @@ The following instructions are for creating two separate apps in Heroku. In one 
 5. Inside `dashApp` directory create git repository
 
     ```
-        cd dashApp
-        git init
+    cd dashApp
+    git init
     ```
 
 6. Create app in Heroku
@@ -43,7 +47,9 @@ The following instructions are for creating two separate apps in Heroku. In one 
 
     Run from terminal `heroku addons:create heroku-postgresql:hobby-dev --app <WEB-APP-NAME>`
 
-8. Write down `DATABASE_URL` to use in step 14
+8. Write down `DATABASE_URL` config var to use it in step 20
+
+    `heroku config`
 
 9. Commit changes
 
@@ -81,7 +87,7 @@ The following instructions are for creating two separate apps in Heroku. In one 
     Create the following Config Vars
     - `AIRFLOW__CORE__FERNET_KEY = <YOUR-FERNET-KEY>`
     - `AIRFLOW__CORE__LOAD_EXAMPLES = False`
-    - `AIRFLOW__CORE__SQL_ALCHEMY_CONN = <SAME-AS-DATABASE_URL-FROM-STEP-8>`
+    - `AIRFLOW__CORE__SQL_ALCHEMY_CONN = <SAME-AS-DATABASE_URL-CONFIG-VAR>`
     - `AIRFLOW__WEBSERVER__AUTHENTICATE = True`
     - `AIRFLOW_HOME = /app`
     
@@ -107,7 +113,7 @@ The following instructions are for creating two separate apps in Heroku. In one 
 
     Run  `heroku run bash`
 
-18. Create User
+18. In heroku app terminal create User
 
     ```
     airflow users create \
@@ -120,7 +126,7 @@ The following instructions are for creating two separate apps in Heroku. In one 
 
 19. Exit from heroku app terminal
 
-20. Log in to Airflow Web UI and create variable to store web app database url
+20. Log in to Airflow Web UI at `<AIRFLOW-APP-NAME>.herokuapp.com` and create variable to store web app's database url from step 8
 
     Name the variable `db_url`
 
