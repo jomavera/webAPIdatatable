@@ -53,9 +53,10 @@ The following instructions guides to the creation of two separate apps in Heroku
 
 9. Commit changes
 
-    `git add .`
-    `git commit -am "Initial commit"`
-    `git push heroku master`
+    ```git add .
+    git commit -am "Initial commit"
+    git push heroku master
+    ```
 
 ### Airflow
 
@@ -97,7 +98,7 @@ The following instructions guides to the creation of two separate apps in Heroku
     2. From Settings in Heroku App webpage
 
 
-15. Set `Procfile`
+15. Set `Procfile` to initialize airflow database
 
     - On `Procfile` write `web: airflow db init`
 
@@ -130,7 +131,7 @@ The following instructions guides to the creation of two separate apps in Heroku
 
     Name the variable `db_url`
 
-21. Update `Procfile` to run scheduler
+21. Set `Procfile` to run airflow webserver and scheduler
 
     - On `Procfile` write `web: airflow webserver --port $PORT --daemon & airflow scheduler`
 
