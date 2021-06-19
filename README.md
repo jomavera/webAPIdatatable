@@ -53,7 +53,8 @@ The following instructions guides to the creation of two separate apps in Heroku
 
 9. Commit changes
 
-    ```git add .
+    ```
+    git add .
     git commit -am "Initial commit"
     git push heroku master
     ```
