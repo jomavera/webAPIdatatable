@@ -1,11 +1,12 @@
-# Table forfor accesible query of data from Web API using Airflow, Dash and Heroku
+# Table for accesible query of data from Web API using Airflow, Dash and Heroku
 
 An ecuadorian supermarket shows its prices in a webpage so as to consumer can check product prices. This webpage doesn't allow to effectively filter, sort and search the price for a particular product. In this way, the purpose of this app is to create an app to access the product prices information and improve the accessibility to consumers. The app can be accessed in [link](http://pulldashboard.herokuapp.com/). This repo is for testing only so it extracts and loads data for 200 products but the DAG can be easily modified to extract the whole data.
 
 ## Description
 
-The application is made up a **Airflow** app that schedules daily updates to the Webpsage database. The Webpage is a **Dash** app that reads data from a Postgress database and present it in a table. The table is capable of filtering and searching. The architecture is discribed in the following figure.
+The application is made up a **Airflow** app that schedules daily updates to the Webpsage database. The Webpage is a plotly's **Dash** app that reads data from a **PostgreSQL** database and present it in a table. The table is capable of filtering and searching. The architecture is discribed in the following figure.
 
+![Figura](diagram.png)
 
 ## Instructions
 The following instructions guides to the creation of two separate apps in Heroku. One app runs the web interface of the table and connection to a Postgres database. The other app runs Airflow DAG that extracts data from the Web API and then loads the data the database of the first app. 
